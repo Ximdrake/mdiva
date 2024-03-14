@@ -21,5 +21,6 @@ Route::group([
     Route::crud('roles', 'RolesCrudController');
     Route::post('maintenance/{id}', 'MaintenanceCrudController@send');
     Route::post('maintenance/check/{id}', 'MaintenanceCrudController@check');
-    
+    Route::get('/user-history/{id}', 'HistoryCrudController@userHistory');
+    Route::crud('history', 'HistoryCrudController');
 }); // this should be the absolute last line of this file

@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\PatientsRequest;
+use App\Http\Requests\HistoryRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class PatientsCrudController
+ * Class HistoryCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class PatientsCrudController extends CrudController
+class HistoryCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -26,9 +26,9 @@ class PatientsCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Patients::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/patients');
-        CRUD::setEntityNameStrings('patients', 'patients');
+        CRUD::setModel(\App\Models\History::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/history');
+        CRUD::setEntityNameStrings('history', 'histories');
     }
 
     /**
@@ -39,10 +39,21 @@ class PatientsCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // set columns from db columns.
-        CRUD::button('history')->stack('line')->view('crud::buttons.history')->meta([
-            'access' => true,
+        $this->crud->addClause('where', 'pid', '=', 3);
+        $this->crud->addColumn([
+            'name' => 'description',
+            'label' => 'Description',
+            'type' => 'text',
         ]);
+        $this->crud->addColumn([
+            'name' => 'created_at',
+            'label' => 'Time',
+            'type' => 'datetime',
+        ]);
+        $this->crud->removeButton('delete');
+        $this->crud->removeButton('view');
+        $this->crud->removeButton('update');
+        
         /**
          * Columns can be defined using the fluent syntax:
          * - CRUD::column('price')->type('number');
@@ -57,7 +68,7 @@ class PatientsCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(PatientsRequest::class);
+        CRUD::setValidation(HistoryRequest::class);
         CRUD::setFromDb(); // set fields from db columns.
 
         /**
@@ -75,5 +86,20 @@ class PatientsCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function userHistory()
+    {
+        $request = $this->crud->getRequest();
+
+        // Retrieve the value of the `id` parameter from the request
+        $id = $request->route('id');
+        
+        // Retrieve the post with the given ID
+        $data = $this->crud->getModel()->where('pid', $id)->get()->toArray();
+        
+      
+
+        return view('data.history', compact('data'));
     }
 }
