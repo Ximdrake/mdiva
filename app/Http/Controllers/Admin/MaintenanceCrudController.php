@@ -114,10 +114,14 @@ class MaintenanceCrudController extends CrudController
         $maintenance = \App\Models\Maintenance::find($id);
         $maintenance->quantity = intval($maintenance->quantity) - intval($maintenance->per_day);
         if ($maintenance->quantity < 1) {
+            $history = \App\Models\History::insert(['patient_id' => $maintenance->patient_id, 'description' => "Maintenance Completed [".$maintenance->quantity_took."/".$maintenance->pres_quantity."]", 'created_at' => date("Y-m-d H:m:s")]);
             $maintenance->status = "Completed";
         } else {
+            $history = \App\Models\History::insert(['patient_id' => $maintenance->patient_id, 'description' => "Maintenance still ongoing. Status: [".$maintenance->quantity_took."/".$maintenance->pres_quantity."]", 'created_at' => date("Y-m-d H:m:s")]);
             $maintenance->status = "Ongoing";
         }
+    
+        $maintenance->quantity_took = $maintenance->quantity_took == null ? intval($maintenance->per_day) : intval($maintenance->quantity_took) + intval($maintenance->per_day);
         $maintenance->save();
     
         if ($maintenance) {

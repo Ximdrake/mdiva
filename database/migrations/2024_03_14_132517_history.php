@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('history', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('pid')->nullable();
+            $table->unsignedInteger('patient_id')->nullable();
             $table->unsignedInteger('m_id')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();

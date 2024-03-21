@@ -39,17 +39,26 @@ class HistoryCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        $this->crud->addClause('where', 'pid', '=', 3);
-        $this->crud->addColumn([
-            'name' => 'description',
-            'label' => 'Description',
-            'type' => 'text',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'created_at',
-            'label' => 'Time',
-            'type' => 'datetime',
-        ]);
+
+        CRUD::setFromDb(); 
+        // $this->crud->addColumn([
+        //     'name' => 'patient_id',
+        //     'label' => 'Name',
+        //     'type' => 'text',
+        //     'entity' => 'patient', // Name of the related entity
+        //     'attribute' => 'first_name', // Name of the attribute to display
+        // ]);
+
+        // $this->crud->addColumn([
+        //     'name' => 'description',
+        //     'label' => 'Description',
+        //     'type' => 'text',
+        // ]);
+        // $this->crud->addColumn([
+        //     'name' => 'created_at',
+        //     'label' => 'Time',
+        //     'type' => 'datetime',
+        // ]);
         $this->crud->removeButton('delete');
         $this->crud->removeButton('view');
         $this->crud->removeButton('update');
@@ -70,7 +79,7 @@ class HistoryCrudController extends CrudController
     {
         CRUD::setValidation(HistoryRequest::class);
         CRUD::setFromDb(); // set fields from db columns.
-
+        CRUD::field('patient_id')->type('select')->model('App\Models\Patients')->attribute('full_name')->label("Patient's Name");
         /**
          * Fields can be defined using the fluent syntax:
          * - CRUD::field('price')->type('number');
@@ -96,10 +105,7 @@ class HistoryCrudController extends CrudController
         $id = $request->route('id');
         
         // Retrieve the post with the given ID
-        $data = $this->crud->getModel()->where('pid', $id)->get()->toArray();
-        
-      
-
+        $data = $this->crud->getModel()->where('patient_id', $id)->get()->toArray();
         return view('data.history', compact('data'));
     }
 }

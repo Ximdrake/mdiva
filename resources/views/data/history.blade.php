@@ -17,7 +17,7 @@
                     <tr>
                         
                         <td>{{ $item['description'] }}</td>
-                        <td>{{ $item['created_at'] }}</td>
+                        <td>{{ \Carbon\Carbon::parse($item['created_at'])->format('F j, Y H:i:s') }}</td>
                     </tr>
                 @endforeach
             </tbody>

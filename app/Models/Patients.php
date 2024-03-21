@@ -21,19 +21,14 @@ class Patients extends Model
     protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
-    // protected $fillable = [];
+    protected $fillable = ['first_name', 'last_name', 'middle_initial', 'suffix', 'number'];
     // protected $hidden = [];
 
     public function getFullNameAttribute()
     {
-        return $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name . ' ' . $this->suffix;
+        return $this->first_name . ' ' . $this->middle_initial . ' ' . $this->last_name . ' ' . $this->suffix;
     }
 
-    public function getFullName()
-    {
-        return $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name . ' ' . $this->suffix;
-    }
-    
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS

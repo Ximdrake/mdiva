@@ -24,6 +24,11 @@ class History extends Model
     // protected $fillable = [];
     // protected $hidden = [];
 
+    public function patient()
+    {
+        $p = $this->belongsTo(Patients::class);
+        return $p;
+    }
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
