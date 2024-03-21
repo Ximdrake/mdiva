@@ -60,7 +60,7 @@ return [
     // The string below will be passed through the url() helper.
     // - default: '' (project root)
     // - alternative: 'admin' (the admin's dashboard)
-    'home_link' => '/admin/maintenance',
+    'home_link' => '/admin/dashboard',
 
     // Menu logo. You can replace this with an <img> tag if you have a logo.
     'project_logo' => 'M-Diva',
@@ -73,10 +73,10 @@ return [
     // ------
 
     // Developer or company name. Shown in footer.
-    'developer_name' => 'Ximdrake Asidor',
+    'developer_name' => 'XA',
 
     // Developer website. Link in footer. Type false if you want to hide it.
-    'developer_link' => 'https://www.facebook.com/Ximdrake',
+    'developer_link' => '#',
 
     // Show powered by Laravel Backpack in the footer? true/false
     'show_powered_by' => false,
