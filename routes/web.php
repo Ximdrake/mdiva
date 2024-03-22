@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+if (env('APP_ENV') == 'prod') {
+    URL::forceScheme('https');
+}
 
 Route::get('/', function () {
     return redirect('/admin');
