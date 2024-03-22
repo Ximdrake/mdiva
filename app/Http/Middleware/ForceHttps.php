@@ -12,9 +12,9 @@ class ForceHttps
     {
         // Check if request is not secure and accessing specific route
        
-        if (!$request->secure()) {
-            return redirect()->secure($request->getRequestUri());
-        }
+        // if (!$request->secure()) {
+        //     return redirect()->secure($request->getRequestUri());
+        // }
 
         return $next($request);
     }
