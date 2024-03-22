@@ -19,7 +19,7 @@ Route::group([
     Route::crud('maintenance', 'MaintenanceCrudController');
     Route::crud('patients', 'PatientsCrudController');
     Route::crud('roles', 'RolesCrudController');
-    Route::post('maintenance/{id}', 'MaintenanceCrudController@send');
+    Route::post('maintenance/send/{id}', 'MaintenanceCrudController@send');
     Route::post('maintenance/check/{id}', 'MaintenanceCrudController@check');
     Route::get('/user-history/{id}', 'HistoryCrudController@userHistory');
     Route::crud('history', 'HistoryCrudController');

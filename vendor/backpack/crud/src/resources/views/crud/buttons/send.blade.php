@@ -1,5 +1,5 @@
 @if ($crud->hasAccess('delete', $entry))
-    <a href="javascript:void(0)" onclick="sendEntry(this)" data-route="{{ url($crud->route.'/'.$entry->getKey()) }}" class="btn btn-sm btn-link" data-button-type="send">
+    <a href="javascript:void(0)" onclick="sendEntry(this)" data-route="{{ url($crud->route.'/send/'.$entry->getKey()) }}" class="btn btn-sm btn-link" data-button-type="send">
         <span><i class="la la-send"></i> Send</span>
     </a>
 @endif
