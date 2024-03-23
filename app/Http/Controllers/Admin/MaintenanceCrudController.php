@@ -83,17 +83,19 @@ class MaintenanceCrudController extends CrudController
 
     public function send(Request $request, $id)
     {
+        $TWILIO_ACCOUNT_SID='AC5fc8541c2877a452e646c0161896045f';
+        $TWILIO_AUTH_TOKEN='657bddbd790a62d7582563aead432b7b';
+        $TWILIO_PHONE_NUMBER='+16592468044';
         $maintenance = \App\Models\Maintenance::find($id);
         $patient = Patients::find($maintenance->patient_id);
         $phone = $patient->number;
         $drug = $maintenance->generic_name;
-        $sid = env('TWILIO_ACCOUNT_SID');
-        $token = env('TWILIO_AUTH_TOKEN');
-        $apiNumber = env('TWILIO_PHONE_NUMBER');
-      
+        $sid = $TWILIO_ACCOUNT_SID;
+        $token = $TWILIO_AUTH_TOKEN;
+        $apiNumber = $TWILIO_PHONE_NUMBER;
         $client = new Client($sid, $token);
         $to = $this->formatPhoneNumber($phone);
-        
+       
         $message = $client->messages->create(
             $to, // To
             [

@@ -8,14 +8,16 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ForceHttps
 {
-    public function handle($request, Closure $next)
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     */
+    public function handle(Request $request, Closure $next): Response
     {
-        // Check if request is not secure and accessing specific route
-       
         // if (!$request->secure()) {
         //     return redirect()->secure($request->getRequestUri());
         // }
-
         return $next($request);
     }
 }
