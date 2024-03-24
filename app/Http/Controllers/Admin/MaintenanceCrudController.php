@@ -84,7 +84,7 @@ class MaintenanceCrudController extends CrudController
     public function send(Request $request, $id)
     {
         $TWILIO_ACCOUNT_SID='AC5fc8541c2877a452e646c0161896045f';
-        $TWILIO_AUTH_TOKEN='657bddbd790a62d7582563aead432b7b';
+        $TWILIO_AUTH_TOKEN='d84c637709edc8889191bba874dc3f9d';
         $TWILIO_PHONE_NUMBER='+16592468044';
         $maintenance = \App\Models\Maintenance::find($id);
         $patient = Patients::find($maintenance->patient_id);

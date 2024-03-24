@@ -21,9 +21,5 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         URL::forceScheme('https');
-        // dd($this->app->environment('production'));
-        // if($this->app->environment('production')) {
-        //     URL::forceScheme('https');
-        // };
     }
 }
